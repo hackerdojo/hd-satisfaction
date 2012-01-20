@@ -1,0 +1,62 @@
+body {
+  background:#A6A6A6 url(stripe2.png) fixed
+}
+body, td {
+  font-family: Verdana, sans-serif;
+  font-size: 15px;
+}
+h1 {
+  font-size:30px;
+  border-bottom:1px solid #ccc;
+}
+h2 {
+  font-size:16px;
+}
+.card {
+  background:white;
+  width:600px;
+  margin:3em auto;
+  padding:18px;
+  border:3px solid #ff7800;
+  -webkit-box-shadow: 4px 4px 32px #666;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+}
+input {
+  text-align:center
+}
+.submit {
+  margin:3em
+}
+.thanks {
+  margin:4em;
+  font-size:18px;
+}
+table.out {
+  margin:3em auto 1em auto;
+}
+
+.survey th,.survey td {
+  padding:7px;
+  border-top:1px solid #ccc;
+  border-left:1px solid #ccc;
+}
+table.survey {
+  border-right:1px solid #ccc;
+  border-bottom:1px solid #ccc;
+}
+div.legend {
+  padding:12px;
+  border: 1px dotted #ccc;
+  margin:0
+}
+
+.legendlabel {
+  margin:0 0 1em 0;
+  border-bottom:1px solid #ddd;
+}
+p.legend {
+  margin:.5em 0;
+  padding-left:1.5em;
+}

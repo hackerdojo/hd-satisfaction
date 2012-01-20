@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Member Satisfaction Index</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+
+<div class="card">
+<h1>Member Satisfaction Index</h1>
+<h2>{% now "F Y" %}</h2>
+
+<p>Please grade Hacker Dojo on the following metrics for this month ({% now "F" %}).  You may leave an answer "<code>--</code>" if you do not have an opinion.   Your answers are anonymous, but data will be made public in aggregate.  You may change your grade at any time during the month by coming back to this page.</p>
+
+<form method=POST>
+<table class="out" cellspacing=0 cellpadding=0 border=0 align=center><tr><td>
+<table class="survey" cellspacing=0 cellpadding=0 border=0 align=center>
+<tr>
+<th>Metric</td>
+<th>Grade</th>
+</tr>
+
+{% for survey_item in survey %}
+   <tr>
+   
+   <td>{{ survey_item.metric }}</td>
+   <td align=center><select name="{{survey_item.metric}}">
+     <option {% ifequal survey_item.grade None %}selected{% endifequal %}>--</option>
+     {% for grade in grades %}
+       <option {% ifequal survey_item.grade grade %}selected{% endifequal %}>{{grade}}</option>
+     {% endfor %}
+   </select></td>
+ 
+   </tr>
+   
+{% endfor %}
+</table>
+</td>
+<td width=50>&nbsp;</td>
+<td>
+<div class="legend">
+<p class="legendlabel"><b>Legend:</b></p>
+<p class=legend>A - I'm very satisfied.</p>
+<p class=legend>B - I'm mostly satisfied.</p>
+<p class=legend>C - Improvement is needed.</p>
+<p class=legend>D - I'm not satisfied.</p>
+<p class=legend>F - Completely unhappy.</p>
+</div>
+</td></tr></table>
+
+<center><input class="submit" type="submit" value="Save" /></center>
+
+</form>
+</div>
+
+  
+</body>
+</html>
