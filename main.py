@@ -90,16 +90,42 @@ class AllDataHandler(webapp.RequestHandler):
             metric=data.metric,
             grade=data.grade,
             who=m.hexdigest()[0:10],
-            month=datetime.now().strftime("%Y-%m"),
-            exact_time=datetime.now().strftime("%m-%d-%Y %H:%M:%S"),)
+            month=data.when.strftime("%Y-%m"),
+            exact_time=data.when.strftime("%m-%d-%Y %H:%M:%S"),)
             
     self.response.out.write(simplejson.dumps([to_dict(data) for data in SatisfactionMetric.all()]))
+
+# How many people answered each month
+#
+# Sample:
+#
+# {"2012-01": 12}
+
+class BasicDataHandler(webapp.RequestHandler):
+  def get(self):
+    
+    monthly_count = {}
+    monthly_users = {}
+    
+    for sm in SatisfactionMetric.all():
+        month = sm.when.strftime("%Y-%m")
+        user = sm.who.email()
+        if month in monthly_count:
+            if user not in monthly_users[month]:
+              monthly_count[month] += 1
+            monthly_users[month][user] = 1
+        else:
+            monthly_count[month] = 0
+            monthly_users[month] = {}
+                    
+    self.response.out.write(simplejson.dumps(monthly_count))
 
 
 def main():
     application = webapp.WSGIApplication([
       ('/', MainHandler),
       ('/api/all', AllDataHandler),
+      ('/api/basic', BasicDataHandler),
     ],debug=True)
     util.run_wsgi_app(application)
 
